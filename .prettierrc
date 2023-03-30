@@ -1,9 +1,9 @@
 
    {"singleQuote": true
    ,"trailingComma": "all"
-   ,"tabWidth": 4
+   ,"tabWidth": 2
    ,"semi": true
-   ,"printWidth": 95
+   ,"printWidth": 100
    ,"jsxBracketSameLine": true
    ,"jsxSingleQuote": true
    ,"proseWrap": "preserve"
