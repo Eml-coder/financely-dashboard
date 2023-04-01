@@ -12,6 +12,7 @@ import {
   Tooltip,
   Area,
 } from 'recharts';
+import BoxHeader from '@/components/BoxHeader';
 
 type Props = {};
 
@@ -36,6 +37,7 @@ const Row1 = (props: Props) => {
   return (
     <>
       <DashboardBox gridArea='a'>
+        <BoxHeader title='Revenue and Expenses' sideText='+5%' subtitle='Top line represents revenue, bottom line represents expenses' />
         {/* begin first chart insert frm recharts */}
         <ResponsiveContainer width='100%' height='100%'>
           <AreaChart
@@ -45,8 +47,8 @@ const Row1 = (props: Props) => {
             margin={{
               top: 15,
               right: 20,
-              left: -10,
-              bottom: 40,
+              left: -15,
+              bottom: 50,
             }}>
             {/* gradient background */}
             <defs>
