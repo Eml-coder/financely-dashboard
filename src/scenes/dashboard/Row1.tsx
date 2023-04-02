@@ -3,15 +3,7 @@ import DashboardBox from '@/components/DashboardBox';
 import { useGetKpisQuery } from '@/state/api';
 import { useTheme } from '@mui/material';
 
-import {
-  ResponsiveContainer,
-  AreaChart,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Area,
-} from 'recharts';
+import { ResponsiveContainer, AreaChart, XAxis, YAxis, Line, Tooltip, Area, CartesianGrid, Legend, LineChart } from 'recharts';
 import BoxHeader from '@/components/BoxHeader';
 
 type Props = {};
@@ -33,11 +25,28 @@ const Row1 = (props: Props) => {
       })
     );
   }, [data]);
+// second chart
+  const revenueProfit = useMemo(() => {
+    return (
+      data &&
+      data[0].monthlyData.map(({ month, revenue, expenses }) => {
+        return {
+          name: month.substring(0, 3),
+          revenue: revenue,
+      profit: (revenue - expenses).toFixed(2),
+        };
+      })
+    );
+  }, [data]);
 
   return (
     <>
       <DashboardBox gridArea='a'>
-        <BoxHeader title='Revenue and Expenses' sideText='+5%' subtitle='Top line represents revenue, bottom line represents expenses' />
+        <BoxHeader
+          title='Revenue and Expenses'
+          sideText='+5%'
+          subtitle='Top line represents revenue, bottom line represents expenses'
+        />
         {/* begin first chart insert frm recharts */}
         <ResponsiveContainer width='100%' height='100%'>
           <AreaChart
@@ -90,7 +99,64 @@ const Row1 = (props: Props) => {
           </AreaChart>
         </ResponsiveContainer>
       </DashboardBox>
-      <DashboardBox gridArea='b'></DashboardBox>
+
+      {/* second chart */}
+      <DashboardBox gridArea='b'>
+        <BoxHeader
+          title='Profit and Revenue'
+          sideText='+5%'
+          subtitle='Top line represents revenue, bottom line represents expenses'
+        />
+
+        <ResponsiveContainer width='100%' height='100%'>
+          <LineChart
+            width={500}
+            height={400}
+            data={revenueProfit}
+            margin={{
+              top: 15,
+              right: 0,
+              left: -15,
+              bottom: 55,
+            }}>
+              <CartesianGrid vertical={false} stroke={palette.grey[800]} />
+                     <XAxis dataKey='name' tickLine={false} style={{ fontSize: '10px' }} />
+            <YAxis
+              yAxisId='left'
+              orientation='left'
+              tickLine={false}
+              style={{ fontSize: '10px' }}
+              axisLine={false}
+            />
+
+            <YAxis
+              yAxisId='right'
+              orientation='right'
+              tickLine={false}
+              style={{ fontSize: '10px' }}
+              axisLine={false}
+            />
+            <Tooltip />
+
+            <Legend height={20} wrapperStyle={{
+              margin: '0 0 10px 0',
+            }} />
+         
+            <Line
+           yAxisId='left'
+              type='monotone'
+              dataKey='profit'
+              stroke={palette.tertiary[500]}
+            />
+            <Line
+            yAxisId='right' 
+              type='monotone'
+              dataKey='revenue'
+              stroke={palette.primary.main}
+            />
+          </LineChart>
+        </ResponsiveContainer>
+      </DashboardBox>
       <DashboardBox gridArea='c'></DashboardBox>
     </>
   );
