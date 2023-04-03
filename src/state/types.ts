@@ -1,4 +1,4 @@
-// This file contains all the types used in the application
+// This file contains all the types used in the application for typescript
 
 export interface ExpensesByCategory {
     salaries: number;
@@ -34,6 +34,22 @@ export interface GetKpisResponse {
     expensesByCategory: ExpensesByCategory;
     monthlyData: Array<Month>;
     dailyData: Array<Day>;
+    createdAt: string;
+    updatedAt: string;
+
+
+
+}
+
+export interface GetProductsResponse {
+    id: string;
+    _id: string;
+    __v: number;
+    price: number;
+    expense: number;
+    transactions: Array<string>;
+    createdAt: string;
+    updatedAt: string;
 
 
 
