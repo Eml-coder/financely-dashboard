@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { ThemeProvider, useTheme } from '@mui/material';
-import {Box, Typography} from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 import BoxHeader from '@/components/BoxHeader';
 import DashboardBox from '@/components/DashboardBox';
@@ -19,13 +19,16 @@ import {
   PieChart,
   Pie,
   Cell,
+  ScatterChart,
+  Scatter,
+  ZAxis,
 } from 'recharts';
 
 // pie data
 
 const pieData = [
-  { name: 'Group A', value: 400 },
-  { name: 'Group B', value: 300 },
+  { name: 'Group A', value: 300 },
+  { name: 'Group B', value: 600 },
   { name: 'Group C', value: 300 },
   { name: 'Group D', value: 200 },
 ];
@@ -116,7 +119,7 @@ const Row2 = () => {
       </DashboardBox>
       {/* end first chart */}
 
-      {/* 2nd chart pie round */}
+      {/* 2nd chart pie round from left */}
 
       <DashboardBox gridArea='e'>
         <BoxHeader title='Campaingns and Targets' sideText='+4%' />
@@ -143,31 +146,67 @@ const Row2 = () => {
               ))}
             </Pie>
           </PieChart>
-          <Box ml="-0.7rem" flexBasis="40%" textAlign="center">
-            <Typography variant="h5">Target Sales</Typography>
-            <Typography m="0.3rem 0" variant="h3" color={palette.primary[300]}>
+          <Box ml='-0.7rem' flexBasis='40%' textAlign='center'>
+            <Typography variant='h5'>Target Sales</Typography>
+            <Typography m='0.3rem 0' variant='h3' color={palette.primary[300]}>
               83
             </Typography>
-            <Typography variant="h6">
-              Finance goals of the campaign that is desired
-            </Typography>
+            <Typography variant='h6'>Finance goals of the campaign that is desired</Typography>
           </Box>
-          <Box flexBasis="40%">
-            <Typography variant="h5">Losses in Revenue</Typography>
-            <Typography variant="h6">Losses are down 25%</Typography>
-            <Typography mt="0.4rem" variant="h5">
+          <Box flexBasis='40%'>
+            <Typography variant='h5'>Losses in Revenue</Typography>
+            <Typography variant='h6'>Losses are down 25%</Typography>
+            <Typography mt='0.4rem' variant='h5'>
               Profit Margins
             </Typography>
-            <Typography variant="h6">
-              Margins are up by 30% from last month.
-            </Typography>
+            <Typography variant='h6'>Margins are up by 30% from last month.</Typography>
           </Box>
-     
         </FlexBetween>
       </DashboardBox>
 
-      {/* 3rd chart */}
-      <DashboardBox gridArea='f'></DashboardBox>
+      {/* 3rd chart from left */}
+      <DashboardBox gridArea='f'>
+        <BoxHeader title='Product Prices vs Expenses' sideText='+5%' />
+        <ResponsiveContainer width='100%' height='100%'>
+          <ScatterChart
+            margin={{
+              top: 20,
+              right: 25,
+              bottom: 40,
+              left: -10,
+            }}>
+            <CartesianGrid stroke={palette.grey[800]} />
+            <XAxis
+              type='number'
+              dataKey='price'
+              name='price'
+              axisLine={false}
+              tickLine={false}
+              style={{ fontSize: '10px' }}
+              tickFormatter={(v) => `$${v}`}
+            />
+
+            <YAxis
+              type='number'
+              dataKey='expense'
+              name='expense'
+              axisLine={false}
+              tickLine={false}
+              style={{ fontSize: '10px' }}
+              tickFormatter={(v) => `$${v}`}
+            />
+
+            <ZAxis type='number' range={[20]} />
+
+            <Tooltip formatter={(v) => `$${v}`} />
+            <Scatter
+              name='Product Expense Ratio'
+              data={productExpenseData}
+              fill={palette.tertiary[500]}
+            />
+          </ScatterChart>
+        </ResponsiveContainer>
+      </DashboardBox>
     </>
   );
 };
