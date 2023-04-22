@@ -180,7 +180,27 @@ const Row3 = () => {
           ))}
         </FlexBetween>
       </DashboardBox>
-      <DashboardBox gridArea='j'></DashboardBox>
+      <DashboardBox gridArea='j'>
+        <BoxHeader title='Overall Summary' sideText='+25%' />
+        <Box
+        height='15px'
+        margin='1.2rem 1rem 0.4rem 1rem'
+        borderRadius='1rem'
+        bgcolor={palette.primary[800]}
+        >
+          <Box
+          height='15px'
+             borderRadius='1rem'
+             bgcolor={palette.primary[600]}
+             width='40%'>
+
+          </Box>
+        </Box>
+    
+          <Typography variant='h5' textAlign='center' color='primary'>
+            $ {kpiData?.[0].totalExpenses} 
+          </Typography>
+      </DashboardBox>
     </>
   );
 };
