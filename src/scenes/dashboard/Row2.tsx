@@ -123,7 +123,7 @@ const Row2 = () => {
 
       <DashboardBox gridArea='e'>
         <BoxHeader title='Campaingns and Targets' sideText='+4%' />
-        <FlexBetween mt='0.25rem' gap='1.5rem' pr='1rem'>
+        <FlexBetween mt='0.25rem' gap='0.5rem' pr='1rem'>
           <PieChart
             width={110}
             height={100}
